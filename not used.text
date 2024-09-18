@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<input type="text" id="input1" myattri="one">
+<input type="text" id="input2" myattri="two">
+<button onclick="add()">Calculate</button>
+<div id="result" style="background-color: green; color:white;">
+
+</div>
+
+
+
+    <script>
+
+var ele2 = document.getElementById('input2').value;
+
+var person = {name:"Jomm,age:36,"};
+    person.name="John";
+    person.age = 35;
+   
+    // refrerenc php and javascript
+php = json_decode() = JSON.parse() in javascript
+php = json_encode() = JSON.stringify() in javascript
+
+$data = file_get_contents("php://input");
+$myObject = json_decode($data,true);//adding true makes it an arr instead of obj
+
+// echo $myObject->gender; access information from objects
+// echo $myObject['gender']; access information from objects
+
+
+    var myString = JSON.stringify(person)
+    var obj = JSON.parse(myString);
+    console.log(obj);
+
+function add(){
+    var ele1 = document.getElementById('input1').value;
+    let add =  parseInt(ele1) + 10;
+   let result = document.getElementById('result');
+    
+   result.innerHTML=add;
+}
+
+
+    </script>
+</body>
+</html>
