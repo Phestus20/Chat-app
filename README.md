@@ -1,7 +1,4 @@
 # ChartUp - Real-Time Chat Application
-
-![ChartUp Logo](path/to/logo.png)
-
 ChartUp is a modern, responsive chat application that enables users to communicate in real-time. Built with PHP and MySQL on the backend, and utilizing JavaScript for dynamic frontend interactions, ChartUp offers a seamless and intuitive chatting experience.
 
 ## Features
@@ -18,7 +15,7 @@ ChartUp is a modern, responsive chat application that enables users to communica
 - **Backend**: PHP
 - **Database**: MySQL
 - **Frontend**: HTML5, CSS3, JavaScript
-- **Real-time Updates**: AJAX (considering upgrade to WebSockets)
+- **Real-time Updates**: AJAX
 - **Version Control**: Git
 
 ## Installation
