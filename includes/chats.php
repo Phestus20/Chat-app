@@ -7,6 +7,7 @@ if(isset($DATA_OBJ->find->userid))
    
 }  
 
+
         $refresh = false;
         $seen = false;
         if($DATA_OBJ->dataType == "chats_refresh")
@@ -108,11 +109,62 @@ if(isset($DATA_OBJ->find->userid))
             <div id='active_contact' >
 
                 <img src='$image'  alt='user photo'>
-                $myuser->username <br>
+                $myuser->username  <br>
                 <span style='font-size:11px;'>'$data->message'</span><!-- to display the last message under user-->
+               
             </div>";
                   // start when you select a contact to start 
             //chating with,it shows the contact on the left
+            $mydata .='
+                    <style>
+                      @media screen and (min-width: 200px) and (max-width: 800px) 
+                         {
+
+
+                         #below-contact-container{
+                            display: block;
+                            }
+                    #left_panel{
+                        display: none;
+                    }
+                
+                .below-contact{
+                            
+                            height: 20px;
+                            display: block;
+                            background-color: /*#404b56;*/#a7b5c2;
+                            border-bottom: solid thin #ffffff55;
+                            cursor: pointer;
+                            padding: 5px;
+                            transition: all  1s ease;
+                            }
+                
+                            .below-contact:hover{
+                                background-color: #778593;
+                                border-bottom: solid thin #ffffff55;
+                                cursor: pointer;
+                                padding: 5px;
+                            
+                            }
+                        .below-contact  img{
+                                float: right;
+                                width: 25px;
+                                
+                                }
+
+                        }
+                    </style>
+                    <div class="div" id="below-contact-container" style="margin-top: 50px;">
+                    <label class= "below-contact"  for="radio_chat"  id="label_chat">Chat <img src="./images/chat1.png" alt="chating icon" style="width:15px;"></label>
+
+                    <label  class= "below-contact"  for="radio_contact" id="label_contact">Contacts <img src="./images/contact.png" alt="friends icon" style="width:15px;"></label>
+                  
+                    <label  class= "below-contact"   for="radio_settings" id="label_settings">Settings <img src="./images/settings.png" alt="settings" style="width:15px;"></label>
+                   
+                    <label  class= "below-contact"  for="radio_logout" name="logout" id="logout">Logout <img src="./images/logout.png" alt="logout icon" style="width:15px;"></label>
+                    </div>';
+
+
            }
             
        // the refresh is  is causing a problem function but not the function, 
@@ -123,6 +175,17 @@ if(isset($DATA_OBJ->find->userid))
            }
      // contains the object that will be carried to send with img, name, etc,
         //$mydata = $mydata;
+
+
+            $html = " <!-- only for small screens bte 300 and 500 start-->
+                    <div class='div' id='small-screens' style='width: 100%; '>
+                        <label for='radio_chat'  id='label_chat'>Chat <img src='./images/chat1.png' alt='chating icon'></label>
+                        <label for='radio_contact' id='label_contact'>Contacts <img src=''./images/contact.png' alt='friends icon'></label>
+                        <label for='radio_settings' id='label_settings'>Settings <img src='./images/settings.png' alt='settings'></label>
+                        <label for='radio_logout' name='logout' id='logout'>Logout <img src='./images/logout.png' alt='logout icon'></label>
+                    </div>
+                     <!-- only for small screens bte 300 and 500 end -->";
+
 
         $info->user = $mydata;
         $info->messages = $messages;
@@ -187,7 +250,7 @@ if(isset($DATA_OBJ->find->userid))
                 $mydata .= "
                 <div id='active_contact' userid='$other_user' onclick='startChat(event)' style='cursor:pointer;'>
                     <img src='$image'  alt='user photo'>
-                    $data->username <br>
+                    $data->username<br>
                     <span style='font-size:11px;'>'$data->message'</span><br>
            <span style='font-size:11px;color:#999;'>" . date("jS M Y H:i:s a", strtotime($data->date))  . "</span>
                 </div>"; 

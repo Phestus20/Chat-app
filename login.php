@@ -70,7 +70,7 @@
         <div id="header">Chatup
         <div style="font-size:22px; font-family:myRegularFont;">Login</div>
         </div>
-        <div id="error">fvdfvbdf</div>
+        <div id="error"></div>
         <form action="" id="my_form">
             
             <input type="email" name='email' placeholder="Email">

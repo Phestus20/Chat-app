@@ -14,7 +14,28 @@
         font-family:myRegularFont;
         src: url(./ui/fonts/OpenSans-Semibold.ttf);
     }
-        #wrapper{
+      
+    #wrapper {
+    max-width: 900px;
+    min-height: 500px;
+    max-height: 630px;
+ 
+    display: flex;
+    margin: 0 auto;
+    margin-top: 5%;
+    color: #fff;
+    font-family: myRegularFont;
+    font-size: 13px;
+    /* Remove box-shadow */
+    
+    /* Add elevation effect */
+    background: rgba(255, 255, 255, 0.1); /* Light background for contrast */
+    border-radius: 12px; /* Optional: round the corners */
+    filter: drop-shadow(0px 24px 24px rgba(0, 0, 0, 0.5)); /* Simulates elevation */
+    transform: translateY(-4px); /* Slightly lift the element */
+}
+    
+    /* #wrapper{
             max-width: 900px;
             min-height: 500px;
             max-height: 630px;
@@ -25,7 +46,7 @@
             font-size: 13px;
             box-shadow: 0px 0px 10px #aaa;
     
-        }
+        }*/
         #left_panel{
             min-height: 500px;
             background-color: /*#27344b*/#767a81ab;
@@ -79,7 +100,7 @@
             text-align: center;
             font-family: summerHeadFont;
             position: relative;
-            box-shadow: 0px 0px 10px #aaa;
+          /*  box-shadow: 0px 0px 10px #aaa;*/
         }
         #inner_left_panel{
             background-color: /*#383e48*/ #ABBCCD;
@@ -141,9 +162,10 @@
         }
 
         #active_contact img{
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             float: left;
+           margin: 6px;
             
             border: 2px solid #fff;
             border-radius: 50%;
@@ -157,7 +179,8 @@
         #message_left{
             margin: 10px;
             padding: 2px;
-            padding-right: 10px;
+            padding-bottom: 12px;
+            padding-left: 10px;
             background-color: #e996143b; 
             color: #444;
             float: left;
@@ -198,7 +221,7 @@
             background-color: #b9e3f04d;
             color: #444;
             float: right;
-            box-shadow: 0px 0px 10px #aaa;
+           /* box-shadow: 0px 0px 10px #aaa;*/
             border-radius: 0 50% 0 0;
             position: relative;
             width: 60%;
@@ -292,6 +315,75 @@
         .image_off{
         display: none;
         }
+
+/* small screens*/
+        #menu {
+            background-color: /*#383e48*/ #ABBCCD;
+            min-height: 430px;
+            max-height: 530px;
+            flex: 1;
+            text-align: center;
+        }
+
+    #below-contact-container{
+    display: none;
+    }
+
+
+        @media screen and (min-width: 200px) and (max-width: 800px) {
+        #message_left #prof_img,
+        #message_right #prof_img {
+        width: 25px;
+        height: 25px;
+        }
+
+        #message_left div img,
+        #message_right div img {
+            width: 10px;
+            height: 10px;
+            object-fit: cover;
+            }
+
+            #contact img {
+            width: 60px;
+            height: 60px;
+            }
+
+            #anim {
+            overflow: hidden;
+            width: 100%;
+            }
+
+            #message_text{
+                width: 50%;
+            }
+            
+          
+
+            #message_left > span{
+            float: right;
+            }
+
+            #chatup{
+                font-size: medium;
+            }
+
+            #active_contact{
+             
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: auto;
+                width: auto;
+            }
+
+            #active_contact img{
+                width: 40px;
+                height: 40px;
+            }
+
+            
+} 
 </style>
 <body>
  
@@ -327,28 +419,33 @@
             <div id="header"> 
             <div class="loader_on" id="loader_holder"><img src="./images/loading.gif" alt="loading" style="width: 70px;" ></div>
                 <div id="image_viewer" class="image_off" onclick="closeImage(event)"></div>
-                Chatup 
+                <span id="chatup"> Chatup </span>
             </div>
                 
           
 
             <div id="container" style="display:flex;">
 
-                <div id="inner_left_panel">
-
-                    
-                    
+              
+    <!-- menu items --> 
+    <div id='menu'>
+               <div id="inner_left_panel"> 
+                 <!-- menu labels here -->
                 </div>
+    </div>
+   <!-- menu items --> 
+
 
                 <input type="radio" id="radio_chat" name="my_radio" style="display: none;">
                 <input type="radio" id="radio_contact" name="my_radio" style="display: none;">
                 <input type="radio" id="radio_settings" name="my_radio" style="display: none;">
                 <input type="radio" id="radio_logout" name="my_radio" style="display: none;">
 
-            
+                
 
                 <div id="inner_right_panel">
                 </div>
+
 
             </div>
 
@@ -361,6 +458,17 @@
 </html>
 <?php sleep(.3) // sleep for the dom elements to load?>
 <script type="text/javascript"> 
+
+
+
+
+
+
+
+
+
+
+
     var sent_audio = new Audio("./images/send.mp3");
     var receive_audio = new Audio("./images/receive.mp3");
 var CURRENT_CHAT_USER = "";
@@ -426,6 +534,7 @@ var SEEN_STATUS = false;
                 window.location = "login.php"
 
             } else {
+
              
                 switch (obj.dataType) {// where the sent messages are received
 
@@ -446,6 +555,7 @@ var SEEN_STATUS = false;
                         case "contacts":
                             SEEN_STATUS = false;
                             var inner_left_panel = _('inner_left_panel');
+                           
                             inner_right_panel.style.overflow = "hidden";
                             inner_left_panel.innerHTML = obj.message;
                         break;
@@ -473,12 +583,30 @@ var SEEN_STATUS = false;
 
                         case "send_message":
                             sent_audio.play();
+
                         case "chats"://where  we receive chats
                             SEEN_STATUS = false;
                         var inner_left_panel = _('inner_left_panel');
                         inner_left_panel.innerHTML = obj.user;//display in left panel
                         inner_right_panel.innerHTML = obj.messages;//display in right panel
-                        
+                       
+                        var left_panel = _('left_panel');
+
+                        if(window.innerWidth < 600 && window.innerWidth > 300){
+
+                        left_panel.style.display = 'none';
+
+                        document.getElementById('wrapper').style.overflowX = 'hidden';
+
+                        //add these
+                        var rightPanel = document.getElementById('right_panel');
+                        rightPanel.style.width = '100%';
+
+                        var innerRightPanel = document.getElementById('inner_right_panel'); 
+                        innerRightPanel.style.width = '70%';
+                        }
+
+
                         // scroll down after receving or sending to show current sent msg
                         var messages_holder = _('messages_holder');
                            // messages_holder.scrollTo(0,messages_holder.scrollHeight);
@@ -635,6 +763,9 @@ var SEEN_STATUS = false;
         }
     }
 //});
+
+
+
     </script>
 
 
@@ -864,96 +995,3 @@ function uploadProfileImage(files)
        image_viewer.className = "image_on";
     }
     </script>
-
-<?php 
-// function getData(find, type) 
-        // {
-
-        //     var xml = new XMLHttpRequest();
-
-        //     // loader gif display when loading request
-        //     var loader_holder = _('loader_holder');
-        //     loader_holder.className = "loader_on";
-
-        //     xml.onload = () => {
-        //         if (xml.readyState == 4 || xml.status == 200) {
-        //             // loader gif off when request is ready
-        //             loader_holder.className = "loader_off";
-        //             handleResult(xml.responseText, type);
-        //         }
-        //     }
-        //     var data = {};
-        //     data.find = find;
-        //     data.dataType = type;
-        //     var data = JSON.stringify(data);
-        //     xml.open('POST', 'api.php', true);
-        //     xml.send(data);
-        //     }
-
-
-
-
-//         // handle flash message
-//         function handleResult(result, type) {
-//         if (result.trim() != "") {
-//             var obj = JSON.parse(result);
-//             if (typeof(obj.logged_in) != "undefined" && !obj.logged_in) 
-//             {
-
-//                 window.location = "login.php"
-
-//              } else {
-
-//          switch (obj.dataType) 
-//         {
-//             case "user_info"://this part updates the left panel user info
-//                 var username = _('username');
-//                 var email = _('email');
-//                 var profile_img = _('profile_img');
-
-//                 if (username && email) { // works during update user info
-//                     username.innerHTML = obj.username;
-//                     email.innerHTML = obj.email;
-//                     profile_img.src = obj.image;
-//                 } else {
-//                     console.error("Username or Email element not found");
-//                 }
-//                 break;
-
-//             case "contacts":
-
-//                     var inner_left_panel = _('inner_left_panel');
-//                     inner_left_panel.innerHTML = obj.message;
-        
-//                 break;
-
-//             case "chats":
-
-//                 var inner_left_panel = _('inner_left_panel');
-//                 inner_left_panel.innerHTML = obj.message;
-
-//                 break;
-
-//             case "settings":
-
-//                 var inner_left_panel = _('inner_left_panel');
-//                 inner_left_panel.innerHTML = obj.message;
-
-//                 break;
-
-//             case "save_settings":
-
-//                 //var inner_left_panel = _('inner_left_panel');
-              
-//                 getData({}, "user_info"); //this reloads the user_info page
-//                 getSettings(true);//this reloads the settings page
-//                 break;
-
-//          }
-
-//      }
-//  }
-// }
-
-
-?>

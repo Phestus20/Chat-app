@@ -1,7 +1,7 @@
 <?php
 @session_start();
 
-$DATA_RAW= file_get_contents("php://input");
+$DATA_RAW = file_get_contents("php://input");
 $DATA_OBJ = json_decode($DATA_RAW);//adding true makes it an arr instead of obj
 
 $info = (object)[];
@@ -147,11 +147,15 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == 'signup')
 
     function message_controls()
     {
-       // echo will not work
-       return " </div>
-       <span onclick='deleteThread(event)' style='color:red;opacity:0.5; cursor:pointer;'>Delete this thread</span>
-
-                    <div style='display:flex; width:100%;height:40px;'>
+        
+    return "
+              </div> 
+          
+              <div style='height: 100px; width:100%;'> 
+          
+                <div style='display:flex; height: 100%; width:100%;'>
+          
+                   <div style='display:flex; flex-direction: row; justify-content: space-evenly; width:100%;height:40px;'>
                         <label for='message_file'><img src='./images/clip.png'/ alt='clip for attachment' 
                         style='opacity:0.8; width:25px; margin:5px;cursor:pointer;'title='attach a file'></label>
                         <input type='file' name='file' style='display:none;' id='message_file' onchange='sendImage(this.files)'/>
@@ -159,8 +163,13 @@ if(isset($DATA_OBJ->dataType) && $DATA_OBJ->dataType == 'signup')
                         name='message_input' placeholder='Type your message here'>
                     
                         <input style='flex:1;cursor:pointer;background:#406089;color:#fff;border:solid 2px #fff;'
-                        type='button' value='Send' name='send_btn' onclick='sendMessage(event)'>
+                        type='button' value='Send' name='send_btn' onclick='sendMessage(event)' id='send_btn'>
                     </div>
-                </div>";
+          
+                </div>
+          
+              </div>
+            ";
+             
     }
 ?>
